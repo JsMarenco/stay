@@ -1,0 +1,18 @@
+---
+import prisma from "../lib/prisma";
+import type { User } from "../schemas/user";
+import Layout from "../layouts/Main.astro";
+import UsersList from "../components/Common/Lists/User.astro";
+
+const usersByPoints = (await prisma.user.findMany({
+  orderBy: { totalPoints: "desc" },
+})) as unknown as User[];
+---
+
+<Layout
+  description="Descubre a los usuarios más comprometidos con el medio ambiente en nuestra plataforma."
+  image="/assets/thumbnails/top.png"
+  title="Top Usuarios por Puntos"
+>
+  <UsersList title="Top Usuarios por Puntos" users={usersByPoints} />
+</Layout>

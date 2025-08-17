@@ -8,10 +8,9 @@
  * Each item includes a label for display and a corresponding href for routing.
  */
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
+  { label: "Inicio", href: "/" },
+  { label: "Jugar", href: "/play" },
+  { label: "Top", href: "/top" },
 ];
 
 export default navLinks;

@@ -1,0 +1,37 @@
+---
+import type { Task } from "../../../schemas/task";
+import UploadTaskButton from "./UploadTaskButton";
+
+interface Props {
+  task: Task;
+}
+
+const { task } = Astro.props;
+---
+
+<article
+  class="flex flex-col justify-between rounded-xl border border-black/20 bg-gray-100/70 p-6 shadow-md backdrop-blur-md transition-shadow duration-300 hover:shadow-xl dark:border-white/20 dark:bg-gray-800/50"
+  id={`task-${task.id}`}
+>
+  <div
+    class="mb-6 overflow-hidden rounded-xl border border-black/30 shadow-sm transition-shadow duration-300 hover:shadow-md dark:border-white/30"
+  >
+    <img
+      alt={task.name}
+      class="w-full rounded-xl object-cover transition-transform duration-500 ease-in-out hover:scale-105"
+      src={task.imageSrc}
+    />
+  </div>
+
+  <h2
+    class="mb-3 text-2xl font-bold tracking-tight text-gray-800 dark:text-gray-100"
+  >
+    {task.name}
+  </h2>
+
+  <p class="mb-6 text-base leading-relaxed text-gray-700 dark:text-gray-300">
+    {task.description}
+  </p>
+
+  <UploadTaskButton client:only="react" task={task} />
+</article>

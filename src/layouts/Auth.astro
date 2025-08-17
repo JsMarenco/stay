@@ -3,25 +3,25 @@
 
 // Current project dependencies
 import BaseHead from "../components/Common/BaseHead.astro";
-import Header from "../components/Common/Header.astro";
-import Footer from "../components/Common/Footer.astro";
 import ScrollTop from "../components/Buttons/ScrollTop";
 import ThemeSwitcher from "../components/Buttons/ThemeSwitcher";
 import cn from "../utils/cn";
-import AuthGuard from "../components/Common/AuthGuard.tsx";
 
 type Props = {
   title?: string;
   description?: string;
   image?: string;
   containerClassnames?: string;
+  bgImage?: string;
+  position?: "left" | "right";
 };
 
 const {
   title = "",
   description = "",
   image = "",
-  containerClassnames,
+  position = "left",
+  bgImage = "",
 } = Astro.props;
 ---
 
@@ -31,18 +31,12 @@ const {
   </head>
 
   <body
-    class="flex min-h-screen flex-col text-black transition-colors duration-200 dark:text-white"
+    class="flex min-h-screen min-w-screen overflow-hidden text-black transition-colors duration-200 dark:text-white"
   >
-    <AuthGuard client:load />
-
-    <div id="modals"></div>
-
-    <Header />
-
     <main
       class:list={cn(
-        "mx-auto my-3 w-full max-w-5xl flex-1 overflow-auto",
-        containerClassnames || "",
+        "fixed top-0 flex h-screen w-1/2 items-center justify-center",
+        position === "left" ? "left-0" : "right-0",
       )}
       transition:animate="fade"
     >
@@ -56,11 +50,20 @@ const {
       <ThemeSwitcher client:load />
     </div>
 
+    <!-- Background overlays -->
+    <div class="fixed inset-0 -z-10 bg-black/70"></div>
+
     <div
-      class="animate-gradientBackground fixed inset-0 -z-20 bg-gradient-to-tr from-gray-200 via-gray-100 to-gray-300 dark:from-gray-950 dark:via-gray-800 dark:to-gray-900"
+      class="background-moving fixed inset-0 -z-20 bg-gradient-to-br from-zinc-900 via-neutral-800 to-zinc-900"
     >
     </div>
 
-    <Footer />
+    <div
+      class="background-moving fixed inset-0 -z-20"
+      style={`background-image: url('${bgImage}'); background-size: cover; background-position: center; filter: blur(10px);`}
+    >
+    </div>
+
+    <div class="fixed inset-0 -z-10 bg-black/70"></div>
   </body>
 </html>

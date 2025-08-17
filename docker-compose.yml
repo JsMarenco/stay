@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: "mongo:latest"
+    container_name: stay_mongo
+    command:
+      [
+        "/bin/sh",
+        "-c",
+        "chmod 400 /etc/mongo/keyfile && mongod --bind_ip_all --replSet rs0 --keyFile /etc/mongo/keyfile",
+      ]
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo_keyfile:/etc/mongo/keyfile
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+
+volumes:
+  mongo_data:

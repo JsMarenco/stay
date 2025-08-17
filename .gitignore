@@ -2,6 +2,7 @@
 dist/
 .vercel/
 
+
 # generated types
 .astro/
 
@@ -27,3 +28,5 @@ pnpm-debug.log*
 bun.lock
 yarn.lock
 package-lock.json
+
+/src/generated/prisma

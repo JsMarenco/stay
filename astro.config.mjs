@@ -8,16 +8,23 @@ import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com",
+  site: "https://stay-liard.vercel.app",
   integrations: [mdx(), sitemap(), react()],
-  output: "static",
-  vite: {
-    plugins: [tailwindcss()],
-  },
+  output: "server",
   adapter: vercelStatic({
     webAnalytics: {
       enabled: false,
     },
     maxDuration: 8,
   }),
+  vite: {
+    plugins: [tailwindcss()],
+  build: {
+    rollupOptions: {
+      external: [
+        /^@prisma\/client\/runtime\/.*/,
+      ],
+    },
+  },
+  },
 });

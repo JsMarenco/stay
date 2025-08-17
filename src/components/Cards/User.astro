@@ -1,0 +1,33 @@
+---
+import type { User } from "../../schemas/user";
+
+interface Props {
+  user: User;
+}
+
+const { username, avatarSrc, totalPoints, totalTasksDone } = Astro.props.user;
+---
+
+<article
+  class="flex items-center justify-between rounded-xl border border-black/20 bg-gray-100/70 p-4 shadow-md backdrop-blur-md transition-shadow duration-300 hover:shadow-xl dark:border-white/50 dark:bg-gray-800/50"
+>
+  <div class="flex items-center">
+    <img
+      alt={username}
+      class="h-16 w-16 rounded-full border-2 border-black/20 object-cover dark:border-white/50"
+      src={avatarSrc || "https://i.pravatar.cc/300"}
+    />
+    <h3 class="ml-4 text-lg font-bold text-gray-800 dark:text-gray-100">
+      {username}
+    </h3>
+  </div>
+
+  <div
+    class="flex items-center text-lg font-semibold text-gray-700 dark:text-gray-300"
+  >
+    <span class="w-20">{totalPoints} pts</span>
+    <span class="w-28 text-right"
+      >{totalTasksDone} {totalTasksDone === 1 ? "tarea" : "tareas"}</span
+    >
+  </div>
+</article>

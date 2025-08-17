@@ -1,0 +1,44 @@
+---
+// Third-party dependencies
+import { getCollection } from "astro:content";
+
+// Current project dependencies
+import TaskCard from "../../Cards/Task/index.astro";
+
+const tasksCollection = await getCollection("tasks");
+const taskCount = tasksCollection.length;
+---
+
+<h1
+  class="mb-6 text-center text-3xl font-bold text-gray-900 transition-colors duration-200 dark:text-gray-100"
+>
+  {
+    taskCount > 0
+      ? `Tienes ${taskCount} ${taskCount === 1 ? "tarea" : "tareas"} para cuidar el medio ambiente`
+      : "No hay tareas disponibles por ahora"
+  }
+</h1>
+
+<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  {
+    tasksCollection.length > 0 ? (
+      tasksCollection.map((task) => (
+        <TaskCard
+          task={{
+            id: task.id,
+            name: task.data.name,
+            description: task.data.description,
+            points: task.data.points,
+            imageSrc: task.data.imageSrc,
+          }}
+        />
+      ))
+    ) : (
+      <div class="col-span-full flex items-center justify-center py-20">
+        <p class="text-center text-gray-600 dark:text-gray-400">
+          No hay tareas disponibles por el momento.
+        </p>
+      </div>
+    )
+  }
+</div>

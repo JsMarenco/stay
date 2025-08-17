@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Main.astro";
+
+const iframeSrc = "https://ecotask.netlify.app/game.html";
+const iframeTitle = "Ecotask Game";
+const iframeWidth = "100%";
+const iframeHeight = "600px";
+const iframeStyle = "border: none;";
+---
+
+<Layout>
+  <iframe
+    height={iframeHeight}
+    src={iframeSrc}
+    style={iframeStyle}
+    title={iframeTitle}
+    width={iframeWidth}></iframe>
+</Layout>

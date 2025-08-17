@@ -39,3 +39,46 @@
 html {
   scroll-behavior: smooth;
 }
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes backgroundMove {
+  0% {
+    background-position: center center;
+  }
+  50% {
+    background-position: center 40%;
+  }
+  100% {
+    background-position: center center;
+  }
+}
+
+.background-moving {
+  animation: backgroundMove 12s ease-in-out infinite;
+}
+
+
+@keyframes gradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradientBackground {
+  background-size: 200% 200%;
+  animation: gradientBackground 20s ease infinite;
+}

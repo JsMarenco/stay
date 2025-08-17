@@ -3,6 +3,13 @@
 
 // Current project dependencies
 import Layout from "../layouts/Main.astro";
+import TasksList from "../components/Common/Lists/Task.astro";
 ---
 
-<Layout />
+<Layout
+  description="Aquí puedes ver y gestionar tus tareas"
+  image="/assets/thumbnails/dashboard.png"
+  title="Dashboard"
+>
+  <TasksList />
+</Layout>

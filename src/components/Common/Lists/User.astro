@@ -1,0 +1,34 @@
+---
+import type { User } from "../../../schemas/user";
+import UserCard from "../../../components/Cards/User.astro";
+
+interface Props {
+  users: User[];
+  title: string;
+  id?: string;
+}
+
+const { users, title, id } = Astro.props;
+---
+
+<section class="mb-10" id={id}>
+  <h2 class="mb-6 text-xl font-bold text-gray-900 dark:text-gray-100">
+    {title}
+  </h2>
+
+  {
+    users.length > 0 ? (
+      <div class="grid w-full grid-cols-1 gap-6">
+        {users.map((user) => (
+          <UserCard user={user} />
+        ))}
+      </div>
+    ) : (
+      <div class="flex items-center justify-center py-20">
+        <p class="text-center text-gray-600 dark:text-gray-400">
+          No hay usuarios para mostrar.
+        </p>
+      </div>
+    )
+  }
+</section>
