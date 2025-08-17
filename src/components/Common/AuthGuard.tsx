@@ -15,7 +15,7 @@ export default function AuthGuard() {
     if (!loading && !user) {
       window.location.href = "/auth/login";
     }
-  }, [loading, user, fetchMainUser]);
+  }, []);
 
   return <div className="hidden">hello</div>;
 }
