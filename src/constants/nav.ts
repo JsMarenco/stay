@@ -9,8 +9,9 @@
  */
 const navLinks = [
   { label: "Inicio", href: "/" },
-  { label: "Jugar", href: "/play" },
+  { label: "Jugar", href: "https://ecotask.netlify.app/game.html" },
   { label: "Top", href: "/top" },
+  { label: "Ponete chiva", href: "https://mantenetechiva.netlify.app" }
 ];
 
 export default navLinks;
