@@ -18,6 +18,13 @@ export default function UploadTaskButton({ task }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
+  const randomElement = (arr: string[]) => {
+    const randomIndex = Math.floor(Math.random() * arr.length); 
+    return arr[randomIndex];
+  };
+
+  const classColor = randomElement(["bg-purple", "bg-blue", "bg-orange", "bg-yellow", "bg-sky", "bg-pink","bg-rose"]);
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.[0]) {
       setFile(e.target.files[0]);
@@ -78,7 +85,7 @@ export default function UploadTaskButton({ task }: Props) {
         {!file && (
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="flex flex-3 items-center justify-center gap-3 rounded-2xl bg-blue-600 px-6 py-4 text-lg font-bold text-white shadow-md transition-transform duration-200 hover:scale-105 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+            className={`flex flex-3 items-center justify-center gap-3 rounded-2xl ${classColor}-600 px-6 py-4 text-lg font-bold text-white shadow-md transition-transform duration-200 hover:scale-105 hover:${classColor}-700 dark:${classColor}-500 dark:hover:${classColor}-600`}
           >
             Seleccionar foto
           </button>
