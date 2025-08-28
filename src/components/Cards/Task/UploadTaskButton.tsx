@@ -1,5 +1,5 @@
 // Third-party dependencies
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import axios from "axios";
 import { FaPaperPlane, FaRedo } from "react-icons/fa";
 
@@ -12,6 +12,19 @@ interface Props {
   task: Task;
 }
 
+const colorClasses: Record<string, string> = {
+  purple:
+    "bg-purple-600 hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600",
+  blue: "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600",
+  orange:
+    "bg-orange-600 hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600",
+  yellow:
+    "bg-yellow-600 hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-600",
+  sky: "bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 dark:hover:bg-sky-600",
+  pink: "bg-pink-600 hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600",
+  rose: "bg-rose-600 hover:bg-rose-700 dark:bg-rose-500 dark:hover:bg-rose-600",
+};
+
 export default function UploadTaskButton({ task }: Props) {
   const { handleSelectFile, handleUploadFile, src } = useUpload();
 
@@ -21,21 +34,12 @@ export default function UploadTaskButton({ task }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
 
-  const randomElement = (arr: string[]) => {
-    const randomIndex = Math.floor(Math.random() * arr.length);
+  const classColor = useMemo(() => {
+    const keys = Object.keys(colorClasses);
+    const randomIndex = Math.floor(Math.random() * keys.length);
 
-    return arr[randomIndex];
-  };
-
-  const classColor = randomElement([
-    "bg-purple",
-    "bg-blue",
-    "bg-orange",
-    "bg-yellow",
-    "bg-sky",
-    "bg-pink",
-    "bg-rose",
-  ]);
+    return colorClasses[keys[randomIndex]];
+  }, []);
 
   const handleSubmit = async () => {
     if (!file) return;
@@ -96,7 +100,7 @@ export default function UploadTaskButton({ task }: Props) {
         {!file && (
           <button
             onClick={() => fileInputRef.current?.click()}
-            className={`flex flex-3 items-center justify-center gap-3 rounded-2xl ${classColor}-600 px-6 py-4 text-lg font-bold text-white shadow-md transition-transform duration-200 hover:scale-105 hover:${classColor}-700 dark:${classColor}-500 dark:hover:${classColor}-600`}
+            className={`flex flex-3 items-center justify-center gap-3 rounded-2xl px-6 py-4 text-lg font-bold text-white shadow-md transition-transform duration-200 hover:scale-105 ${classColor}`}
           >
             Seleccionar foto
           </button>
