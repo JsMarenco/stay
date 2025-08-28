@@ -6,6 +6,12 @@
     "imageSrc": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/NEA_recycling_bins%2C_Orchard_Road.JPG/1200px-NEA_recycling_bins%2C_Orchard_Road.JPG"
   },
   {
+    "name": "Ahorra energia",
+    "description": "Apaga las luces cuando no las estes usando",
+    "points": 5,
+    "imageSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNNyPr7HQw4OfCaJbVSfIKPmXb0_WW8Msd7g&s"
+  } ,
+  {
     "name": "Usar bolsas reutilizables",
     "description": "Reutilizar bolsas de tela en lugar de bolsas plásticas.",
     "points": 3,
@@ -41,4 +47,6 @@
     "points": 5,
     "imageSrc": "https://a.storyblok.com/f/146790/1600x842/7ac33a43f1/how-to-organize-a-beach-clean-up-0.png"
   }
+
+  
 ]
