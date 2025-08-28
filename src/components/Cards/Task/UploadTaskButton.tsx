@@ -6,12 +6,15 @@ import { FaPaperPlane, FaRedo } from "react-icons/fa";
 // Current project dependencies
 import type { Task, TaskCompletedDto } from "../../../schemas/task";
 import Modal from "../../Common/Modal";
+import useUpload from "../../../hooks/useUpload";
 
 interface Props {
   task: Task;
 }
 
 export default function UploadTaskButton({ task }: Props) {
+  const { handleSelectFile, handleUploadFile, src } = useUpload();
+
   const [file, setFile] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -19,28 +22,33 @@ export default function UploadTaskButton({ task }: Props) {
   const [successMessage, setSuccessMessage] = useState("");
 
   const randomElement = (arr: string[]) => {
-    const randomIndex = Math.floor(Math.random() * arr.length); 
+    const randomIndex = Math.floor(Math.random() * arr.length);
+
     return arr[randomIndex];
   };
 
-  const classColor = randomElement(["bg-purple", "bg-blue", "bg-orange", "bg-yellow", "bg-sky", "bg-pink","bg-rose"]);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setFile(e.target.files[0]);
-    }
-  };
+  const classColor = randomElement([
+    "bg-purple",
+    "bg-blue",
+    "bg-orange",
+    "bg-yellow",
+    "bg-sky",
+    "bg-pink",
+    "bg-rose",
+  ]);
 
   const handleSubmit = async () => {
     if (!file) return;
 
     setLoading(true);
 
+    await handleUploadFile();
+
     const taskCompletedDto: TaskCompletedDto = {
       name: task.name,
       description: task.description,
       points: task.points,
-      imageSrc: task.imageSrc,
+      imageSrc: src || "",
     };
 
     try {
@@ -78,7 +86,10 @@ export default function UploadTaskButton({ task }: Props) {
         <input
           ref={fileInputRef}
           type="file"
-          onChange={handleFileChange}
+          accept="image/*"
+          onChange={(e) =>
+            e.target.files && handleSelectFile(e.target.files[0])
+          }
           className="hidden"
         />
 
